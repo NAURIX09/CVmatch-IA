@@ -1,0 +1,14 @@
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Variables d'environnement (clé API, mot de passe BDD)
+api/.env
+
+# Uploads (CV des candidats)
+public/uploads/
+
+# Cache
+api/**/__pycache__/
