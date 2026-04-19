@@ -30,24 +30,35 @@ def valider_requete_metier(requete: str) -> dict:
     Valide et enrichit la requête avec un référentiel métier.
     Retourne un dict avec est_valide, titre_normalise, competences_attendues, etc.
     """
-    prompt = f"""Tu es un expert en recrutement. Réponds UNIQUEMENT en JSON valide, sans texte avant ou après.
+    prompt = f"""Tu es un expert en recrutement, spécialisé dans la normalisation et la validation des métiers.
+Réponds UNIQUEMENT en JSON valide, sans aucun texte avant ou après le JSON.
 
-Analyse si cette requête correspond à un métier réel reconnu sur le marché de l'emploi.
+Instructions :
+1. Normalise d'abord la requête :
+   - Corrige les fautes d'orthographe et les variantes courantes.
+   - Identifie le métier réel visé même s'il est mal écrit ou abrégé.
+2. Analyse si le métier existe réellement sur le marché de l'emploi.
 
-RÈGLE ABSOLUE : 
-- Si le métier N'EXISTE PAS ou est fictif ou absurde → est_valide DOIT être false
-- Si le métier EXISTE → est_valide DOIT être true ET message_erreur DOIT être vide ""
+RÈGLE ABSOLUE :
+- Si le métier est fictif, absurde ou n'existe pas → "est_valide" doit être false
+- Si le métier existe vraiment → "est_valide" doit être true et "message_erreur" doit être une chaîne vide ""
 
-Exemples de métiers INVALIDES : "vendeur d'illusion", "chasseur de dragons", "magicien du bonheur", "ninja du marketing"
-Exemples de métiers VALIDES : "développeur PHP", "comptable", "médecin", "chauffeur", "avocat", "data analyst", "infirmier", "enseignant", "ingénieur"
+Exemples de métiers INVALIDES : "vendeur d'illusion", "chasseur de dragons", "magicien du bonheur", "ninja du marketing", "super héros IT", "développeur de rêves"
+Exemples de métiers VALIDES : "développeur", "développeur full stack", "avocat", "avocat droit des affaires", "data analyst", "comptable", "infirmier", "ingénieur DevOps", "juriste", "chauffeur", "enseignant"
 
-JSON si INVALIDE :
-{{"est_valide":false,"message_erreur":"❌ '{requete}' n'est pas un métier reconnu sur le marché de l'emploi.","titre_normalise":"","reference_metier":"","competences_attendues":[],"soft_skills":[],"formations":[],"niveau_experience":""}}
+Requête à analyser : {requete}
 
-JSON si VALIDE :
-{{"est_valide":true,"message_erreur":"","titre_normalise":"intitulé normalisé","reference_metier":"description du métier","competences_attendues":["comp1","comp2"],"soft_skills":["soft1"],"formations":["formation1"],"niveau_experience":"junior/senior"}}
-
-Requête à analyser : {requete}"""
+Réponds strictement avec ce format JSON :
+{{
+  "est_valide": true,
+  "message_erreur": "",
+  "titre_normalise": "intitulé du métier corrigé et standardisé",
+  "reference_metier": "brève description professionnelle du métier",
+  "competences_attendues": ["compétence1", "compétence2", "compétence3"],
+  "soft_skills": ["soft skill 1", "soft skill 2"],
+  "formations": ["Formation 1", "Formation 2"],
+  "niveau_experience": "junior / intermédiaire / senior / non spécifié"
+}}"""
 
     try:
         r = _client.chat.completions.create(

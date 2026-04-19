@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     </div>
   </div>
 </div>
-<footer>© <?= date('Y') ?> CVMatch IA</footer>
+<footer>© <?= date('Y') ?> CVMatch IA / Recruteur : recruteur@cvmatch.ci / password123 </footer>
 <script>
 function switchTab(t){
   document.getElementById('panel-login').style.display=t==='login'?'block':'none';

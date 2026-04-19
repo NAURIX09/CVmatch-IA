@@ -107,7 +107,7 @@ try {
     <div class="grid-4">
       <div class="stat-card"><div class="stat-card-label">Candidats indexés</div><div class="stat-card-val"><?= $nb_candidats ?></div></div>
       <div class="stat-card"><div class="stat-card-label">Sessions IA</div><div class="stat-card-val"><?= $nb_sessions ?></div></div>
-      <div class="stat-card"><div class="stat-card-label">CV analysés</div><div class="stat-card-val"><?= $nb_cv_analyses ?></div></div>
+      <div class="stat-card"><div class="stat-card-label">Temps moyen</div><div class="stat-card-val">10<span class="unit">s</span></div></div>
       <div class="stat-card"><div class="stat-card-label">CV externes</div><div class="stat-card-val"><?= $nb_cv_externes ?></div></div>
     </div>
 
