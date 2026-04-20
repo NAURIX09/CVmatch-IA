@@ -8,7 +8,7 @@ __pycache__/
 api/.env
 
 # Uploads (CV des candidats)
-public/uploads/
+
 
 # Cache
 api/**/__pycache__/
